@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Регламент Рейда и Войны | KAMI</title>
+<style>
+  :root {
+    --bg: #0f0d0a;
+    --bg2: #1a1612;
+    --card: #221c16;
+    --border: #3d3226;
+    --gold: #c9a961;
+    --gold2: #e8c987;
+    --red: #a83a3a;
+    --green: #5a8a4a;
+    --text: #e8e0d0;
+    --muted: #8a7d6a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(201,169,97,0.06) 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(168,58,58,0.05) 0%, transparent 40%);
+  }
+
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 2px solid var(--border);
+    position: relative;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .crest { font-size: 48px; margin-bottom: 10px; filter: drop-shadow(0 0 12px rgba(201,169,97,0.4)); }
+
+  h1 {
+    font-size: 42px;
+    color: var(--gold2);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+
+  .subtitle { color: var(--muted); font-style: italic; margin-top: 8px; font-size: 16px; }
+
+  .divider {
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px auto 0;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+  /* ===== ПРИНЦИПЫ ===== */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .principle {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    padding: 18px 20px;
+    border-radius: 4px;
+  }
+
+  .principle h3 {
+    color: var(--gold2);
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+
+  .principle p { font-size: 13px; color: var(--muted); }
+
+  /* ===== СЕКЦИИ ===== */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+
+  .section.red { border-left: 4px solid var(--red); }
+  .section.gold { border-left: 4px solid var(--gold); }
+  .section.green { border-left: 4px solid var(--green); }
+
+  .section h2 {
+    color: var(--gold2);
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: normal;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section p { font-size: 14px; margin-bottom: 12px; line-height: 1.7; }
+  .section p:last-child { margin-bottom: 0; }
+
+  .section ul { list-style: none; font-size: 14px; }
+
+  .section li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    border-bottom: 1px solid #2a2218;
+  }
+
+  .section li:last-child { border-bottom: none; }
+
+  .section li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 10px;
+    top: 12px;
+  }
+
+  .highlight { color: var(--gold2); font-weight: bold; }
+  .neg { color: #e89090; }
+  .pos { color: #90e8b0; }
+
+  /* ===== ТАБЛИЦА ПОВОДОВ ===== */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg2);
+    margin-top: 16px;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+
+  thead { background: linear-gradient(180deg, #2a2218, #1e1812); }
+
+  th {
+    padding: 14px 12px;
+    text-align: left;
+    color: var(--gold2);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+
+  td { padding: 12px; border-bottom: 1px solid #2a2218; vertical-align: top; }
+
+  tbody tr { transition: background 0.15s; }
+  tbody tr:hover { background: rgba(201,169,97,0.05); }
+
+  .cat-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .cat-polit { background: #3a2a4a; color: #c9a0e8; }
+  .cat-econ  { background: #4a3a1a; color: #e8c987; }
+  .cat-relig { background: #2a3a4a; color: #90c0e8; }
+  .cat-war   { background: #4a1a1a; color: #e89090; }
+  .cat-pers  { background: #1a3a2a; color: #90e8b0; }
+  .cat-hid   { background: #2a2a2a; color: #b0b0b0; }
+
+  .reason-name { color: var(--gold2); font-weight: bold; font-size: 15px; }
+
+  .muted { color: var(--muted); font-size: 13px; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 700px) {
+    h1 { font-size: 26px; letter-spacing: 2px; }
+    .crest { font-size: 36px; }
+    th, td { padding: 8px; font-size: 12px; }
+    .hide-mobile { display: none; }
+    .section { padding: 18px 16px; }
+    .section h2 { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crest">⚔️</div>
+  <h1>KAMI</h1>
+  <p class="subtitle">Регламент рейда и войны · YUFU.SU</p>
+  <div class="divider"></div>
+</header>
+
+<div class="container">
+
+  <!-- ПРИНЦИПЫ -->
+  <div class="principles">
+    <div class="principle">
+      <h3>Минимум бюрократии</h3>
+      <p>Нет баллов, счётов и «листочков». Повод либо есть, либо его нет.</p>
+    </div>
+    <div class="principle">
+      <h3>Война даёт результат</h3>
+      <p>Победитель получает землю, ресурсы, влияние. Проигравший теряет.</p>
+    </div>
+    <div class="principle">
+      <h3>Сёгун — арбитр</h3>
+      <p>Он не разрешает войну, а судит спор. Не согласен — вступает сам.</p>
+    </div>
+    <div class="principle">
+      <h3>Кланы решают сами</h3>
+      <p>Конфликт — дело двух сторон. Вышка вмешивается только при нарушении.</p>
+    </div>
+  </div>
+
+  <!-- ЧТО ТАКОЕ ВОЙНА -->
+  <div class="section red">
+    <h2>Что есть война</h2>
+    <p><span class="highlight">Война</span> — это вооружённый конфликт между кланами за <span class="highlight">ресурс, землю, влияние или честь</span>, начатый по конкретному поводу и ведущий к перераспределению сил на карте.</p>
+    <p>Война не начинается «по чиху». Но и не требует разрешения сёгуна. Она начинается тогда, когда <span class="highlight">одна сторона объявляет повод</span>, а <span class="highlight">другая отказывается его урегулировать</span> миром.</p>
+    <p><span class="neg">Просто так, без повода и без объявления — это не война, а DM/Fail RP.</span></p>
+  </div>
+
+  <!-- ПОВОДЫ -->
+  <div class="section gold">
+    <h2>Поводы к войне</h2>
+    <p>Повод — это <span class="highlight">конкретное действие</span>, за которое одна сторона требует сатисфакции. Повод фиксируется в донесении или указе. Без доказательств повод недействителен.</p>
+    <p>Повод <span class="highlight">не суммируется в баллы</span>. Каждый повод — отдельный casus belli. Один серьёзный повод может начать войну. Много мелких — повод для крупного рейда.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>Повод</th>
+            <th class="hide-mobile">Категория</th>
+            <th>Что требует</th>
+            <th class="hide-mobile">Если отказ —</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="muted">1</td><td><span class="reason-name">Нарушение границы хана</span></td><td class="hide-mobile"><span class="cat-badge cat-polit">Политика</span></td><td>Компенсация 10% дохода</td><td class="hide-mobile">Малый рейд</td></tr>
+          <tr><td class="muted">2</td><td><span class="reason-name">Оскорбление чести даймё</span></td><td class="hide-mobile"><span class="cat-badge cat-polit">Политика</span></td><td>Публичное извинение</td><td class="hide-mobile">Рейд + репутация −10</td></tr>
+          <tr><td class="muted">3</td><td><span class="reason-name">Отказ от дани</span></td><td class="hide-mobile"><span class="cat-badge cat-polit">Политика</span></td><td>Выплата 15% дохода</td><td class="hide-mobile">Рейд + штраф</td></tr>
+          <tr><td class="muted">4</td><td><span class="reason-name">Укрывательство преступника</span></td><td class="hide-mobile"><span class="cat-badge cat-polit">Политика</span></td><td>Выдача преступника</td><td class="hide-mobile">Рейд + репутация −15</td></tr>
+          <tr><td class="muted">5</td><td><span class="reason-name">Месть за убийство самурая</span></td><td class="hide-mobile"><span class="cat-badge cat-pers">Личное</span></td><td>Выдача убийцы или компенсация</td><td class="hide-mobile">Кровная месть (законна)</td></tr>
+          <tr><td class="muted">6</td><td><span class="reason-name">Захват рисовых полей</span></td><td class="hide-mobile"><span class="cat-badge cat-econ">Экономика</span></td><td>Возврат земли + 10% урожая</td><td class="hide-mobile">Рейд + возврат силой</td></tr>
+          <tr><td class="muted">7</td><td><span class="reason-name">Блокировка торгового пути</span></td><td class="hide-mobile"><span class="cat-badge cat-econ">Экономика</span></td><td>Открытие пути + 15% пошлины</td><td class="hide-mobile">Рейд + блокада в ответ</td></tr>
+          <tr><td class="muted">8</td><td><span class="reason-name">Контрабанда через хан</span></td><td class="hide-mobile"><span class="cat-badge cat-econ">Экономика</span></td><td>Конфискация + штраф 20%</td><td class="hide-mobile">Рейд + конфискация</td></tr>
+          <tr><td class="muted">9</td><td><span class="reason-name">Осквернение святыни</span></td><td class="hide-mobile"><span class="cat-badge cat-relig">Религия</span></td><td>Компенсация + ритуал очищения</td><td class="hide-mobile">Крупный рейд + репутация −25</td></tr>
+          <tr><td class="muted">10</td><td><span class="reason-name">Укрывательство еретиков</span></td><td class="hide-mobile"><span class="cat-badge cat-relig">Религия</span></td><td>Выдача еретиков</td><td class="hide-mobile">Рейд + репутация −20</td></tr>
+          <tr><td class="muted">11</td><td><span class="reason-name">Захват заложников</span></td><td class="hide-mobile"><span class="cat-badge cat-war">Война</span></td><td>Освобождение заложников</td><td class="hide-mobile">Война (casus belli)</td></tr>
+          <tr><td class="muted">12</td><td><span class="reason-name">Превентивный удар</span></td><td class="hide-mobile"><span class="cat-badge cat-war">Война</span></td><td>Объяснение + компенсация</td><td class="hide-mobile">Война (casus belli)</td></tr>
+          <tr><td class="muted">13</td><td><span class="reason-name">Поддержка мятежника</span></td><td class="hide-mobile"><span class="cat-badge cat-war">Война</span></td><td>Прекращение поддержки</td><td class="hide-mobile">Война + репутация −10</td></tr>
+          <tr><td class="muted">14</td><td><span class="reason-name">Провокация с целью втянуть сёгунат</span></td><td class="hide-mobile"><span class="cat-badge cat-war">Война</span></td><td>Публичное опровержение</td><td class="hide-mobile">Крупный рейд + сёгунат вмешивается</td></tr>
+          <tr><td class="muted">15</td><td><span class="reason-name">Похищение невесты / наложницы</span></td><td class="hide-mobile"><span class="cat-badge cat-pers">Личное</span></td><td>Возврат + компенсация</td><td class="hide-mobile">Кровная месть (законна)</td></tr>
+          <tr><td class="muted">16</td><td><span class="reason-name">Предательство вассала</span></td><td class="hide-mobile"><span class="cat-badge cat-pers">Личное</span></td><td>Наказание предателя</td><td class="hide-mobile">Рейд + репутация −10</td></tr>
+          <tr><td class="muted">17</td><td><span class="reason-name">Тайное поручение сёгуната</span></td><td class="hide-mobile"><span class="cat-badge cat-hid">Скрытое</span></td><td>Санкция бакуфу</td><td class="hide-mobile">Война с санкции сёгуна</td></tr>
+          <tr><td class="muted">18</td><td><span class="reason-name">Двойная игра</span></td><td class="hide-mobile"><span class="cat-badge cat-hid">Скрытое</span></td><td>Раскрытие и компенсация</td><td class="hide-mobile">Рейд + репутация −15</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:12px;">Поводы 5 и 15 — законная кровная месть. Сёгунат не блокирует, но фиксирует.</p>
+  </div>
+
+  <!-- ПОРЯДОК ОБЪЯВЛЕНИЯ ВОЙНЫ -->
+  <div class="section red">
+    <h2>Порядок объявления войны</h2>
+    <p><span class="highlight">Шаг 1. Прение сторон.</span> Сторона, имеющая повод, направляет другой стороне <span class="highlight">требование</span> (письмо, гонец, RP-сцена). Требование содержит: повод, доказательства, условия урегулирования.</p>
+    <p><span class="highlight">Шаг 2. Ответ.</span> Вторая сторона может: принять условия, предложить перемирие, отказаться. Отказ или игнорирование — повод к войне.</p>
+    <p><span class="highlight">Шаг 3. Оповещение сёгуна.</span> Сторона уведомляет сёгуна о конфликте (не просит разрешения — <span class="highlight">уведомляет</span>). Сёгун может: остаться нейтральным, поддержать одну из сторон, вступить сам.</p>
+    <p><span class="highlight">Шаг 4. Объявление войны.</span> Публичное оповещение всех кланов: кто, с кем, по какому поводу, какие цели. С этого момента война начата.</p>
+    <p><span class="neg">Война без оповещения — DM. Война без повода — Fail RP.</span></p>
+  </div>
+
+  <!-- ЧТО ДАЁТ ВОЙНА -->
+  <div class="section green">
+    <h2>Что даёт война победителю</h2>
+    <p>Война — не просто «победили и разошлись». Победитель получает <span class="highlight">конкретный результат</span>:</p>
+    <ul>
+      <li><span class="pos">Земля</span> — захваченные поля, шахты, храмы переходят победителю.</li>
+      <li><span class="pos">Ресурсы</span> — 20–30% дохода проигравшего на срок 1 игровой месяц.</li>
+      <li><span class="pos">Влияние</span> — репутация +15, место в совете сёгуна (если есть).</li>
+      <li><span class="pos">Заложники</span> — если захвачены, проигравший платит выкуп или теряет людей.</li>
+      <li><span class="pos">Хроника</span> — запись в историю сервера. Это остаётся.</li>
+    </ul>
+    <p><span class="neg">Проигравший</span> теряет землю, платит дань, теряет репутацию. Но <span class="highlight">не теряет клан</span> — если не было условия «полного уничтожения», клан сохраняется.</p>
+  </div>
+
+  <!-- ПЕРЕМИРИЕ И ЗАПРЕТ -->
+  <div class="section gold">
+    <h2>Перемирие и период запрета</h2>
+    <p>После окончания войны объявляется <span class="highlight">период запрета на нападение и новую войну — 5–7 игровых дней</span>. Это время на восстановление, выплату дани, переговоры.</p>
+    <p><span class="highlight">Вызов на дуэли блокируется на 3–4 дня</span> для любых кланов, пытающихся развязать новый конфликт с участниками войны. Это защита от «хищников», которые ждут, пока стороны обескровлены.</p>
+    <p>Перемирие можно продлить по согласию обеих сторон. Можно разорвать — но только с новым поводом и новым объявлением.</p>
+  </div>
+
+  <!-- РОЛЬ СЁГУНАТА -->
+  <div class="section red">
+    <h2>Роль сёгуната</h2>
+    <p>Сёгун <span class="highlight">не разрешает</span> войну. Он <span class="highlight">судит спор</span>, если стороны к нему обращаются.</p>
+    <ul>
+      <li>Сёгун может <span class="highlight">принять сторону</span> — тогда война идёт с его поддержкой.</li>
+      <li>Сёгун может <span class="highlight">остаться нейтральным</span> — война идёт без него.</li>
+      <li>Сёгун может <span class="highlight">вступить сам</span> — если видит угрозу порядку.</li>
+      <li>Сёгун <span class="neg">не блокирует</span> войну, если повод действителен и объявление соблюдено.</li>
+    </ul>
+    <p>Вмешательство сёгуна — это <span class="highlight">политический акт</span>, а не бюрократическая проверка. Он рискует репутацией, если судит несправедливо.</p>
+  </div>
+
+  <!-- ЧТО НЕ ТАК С БАЛЛАМИ -->
+  <div class="section gold">
+    <h2>Почему без баллов</h2>
+    <p>Система баллов («оскорбил сёгуна — 2 балла, убил самурая — 3 балла») превращает конфликт в <span class="neg">бухгалтерию</span>. Сидеть с листочком и считать — не РП. Это убивает атмосферу и превращает войну в отчёт перед куратором.</p>
+    <p>Вместо этого — <span class="highlight">конкретный повод с конкретным требованием</span>. Либо сторона выполняет требование, либо получает войну. Просто и по-самурайски.</p>
+  </div>
+
+</div>
+
+<footer>
+  ⚔️ РЕГЛАМЕНТ · YUFU.SU · KAMI ⚔️<br>
+  Система поводов к рейду и войне между кланами
+</footer>
+
+</body>
+</html>
